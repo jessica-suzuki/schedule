@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-sans: "Manrope", sans-serif;
+
+  --color-ink: #2b2430;
+  --color-porcelain: #fbf8f6;
+  --color-surface: #ffffff;
+  --color-wine: #7a3b4e;
+  --color-wine-dark: #5c2c3c;
+  --color-blush: #f1dede;
+  --color-blush-deep: #e8c4c4;
+  --color-gold: #c89b3c;
+  --color-sage: #5b7b63;
+  --color-line: #e7dfdb;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-porcelain);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+@layer components {
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-wine/30;
+  }
+  .btn-primary {
+    @apply bg-wine text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-wine-dark disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply bg-porcelain text-ink rounded-lg px-4 py-2 text-sm font-medium hover:bg-line/60;
+  }
+  .card {
+    @apply bg-surface border border-line rounded-xl;
+  }
+}
+
+/* FullCalendar theming overrides to match the palette */
+.fc {
+  --fc-border-color: var(--color-line);
+  --fc-today-bg-color: rgba(122, 59, 78, 0.06);
+  --fc-neutral-bg-color: var(--color-surface);
+  font-family: var(--font-sans);
+}
+.fc .fc-toolbar-title {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-size: 1.25rem;
+}
+.fc .fc-button {
+  background-color: var(--color-surface);
+  border-color: var(--color-line);
+  color: var(--color-ink);
+  text-transform: capitalize;
+  box-shadow: none !important;
+}
+.fc .fc-button:hover {
+  background-color: var(--color-blush);
+}
+.fc .fc-button-active, .fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: var(--color-wine) !important;
+  border-color: var(--color-wine) !important;
+  color: white !important;
+}
+.fc-event {
+  border: none !important;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 1px 4px;
+}
+
+@media (max-width: 767px) {
+  .fc .fc-toolbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .fc .fc-toolbar-chunk {
+    display: flex;
+    align-items: center;
+  }
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+  .fc .fc-button {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .fc .fc-timegrid-slot-label {
+    font-size: 0.7rem;
+  }
+  .fc .fc-event {
+    padding: 1px 2px;
+  }
+  .fc .fc-event-main {
+    min-width: 0;
+  }
+}

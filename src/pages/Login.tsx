@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../lib/auth'
 import { api } from '../lib/apiClient'
+import { PasswordInput } from '../components/PasswordInput'
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -70,8 +71,7 @@ export default function LoginPage() {
             </label>
             <label className="block">
               <span className="block text-xs font-medium text-ink/60 mb-1">Senha</span>
-              <input
-                type="password"
+              <PasswordInput
                 required
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}

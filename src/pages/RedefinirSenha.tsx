@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { api } from '../lib/apiClient'
+import { PasswordInput } from '../components/PasswordInput'
 
 export default function RedefinirSenhaPage() {
   const [searchParams] = useSearchParams()
@@ -74,8 +75,7 @@ export default function RedefinirSenhaPage() {
             {erro && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{erro}</p>}
             <label className="block">
               <span className="block text-xs font-medium text-ink/60 mb-1">Nova senha</span>
-              <input
-                type="password"
+              <PasswordInput
                 required
                 minLength={6}
                 value={senha}
@@ -85,8 +85,7 @@ export default function RedefinirSenhaPage() {
             </label>
             <label className="block">
               <span className="block text-xs font-medium text-ink/60 mb-1">Confirmar nova senha</span>
-              <input
-                type="password"
+              <PasswordInput
                 required
                 minLength={6}
                 value={confirmarSenha}

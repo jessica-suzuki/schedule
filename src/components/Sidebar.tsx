@@ -4,12 +4,12 @@ import clsx from 'clsx'
 import { supabase } from '../lib/supabaseClient'
 
 const ITENS = [
-  { to: '/', label: 'Painel', icon: LayoutDashboard, end: true },
-  { to: '/agenda', label: 'Agenda', icon: CalendarDays },
-  { to: '/agendamentos', label: 'Agendamentos', icon: CalendarPlus },
-  { to: '/clientes', label: 'Clientes', icon: Users },
-  { to: '/procedimentos', label: 'Procedimentos', icon: Sparkles },
-  { to: '/relatorios', label: 'Relatórios', icon: BarChart3 },
+  { to: '/admin', label: 'Painel', icon: LayoutDashboard, end: true },
+  { to: '/admin/agenda', label: 'Agenda', icon: CalendarDays },
+  { to: '/admin/agendamentos', label: 'Agendamentos', icon: CalendarPlus },
+  { to: '/admin/clientes', label: 'Clientes', icon: Users },
+  { to: '/admin/procedimentos', label: 'Procedimentos', icon: Sparkles },
+  { to: '/admin/relatorios', label: 'Relatórios', icon: BarChart3 },
 ]
 
 export function Sidebar() {

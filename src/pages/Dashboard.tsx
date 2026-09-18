@@ -87,7 +87,7 @@ export default function Dashboard() {
               ))}
             </div>
           )}
-          <Link to="/agenda" className="inline-flex items-center gap-1.5 text-sm text-wine mt-3 hover:underline">
+          <Link to="/admin/agenda" className="inline-flex items-center gap-1.5 text-sm text-wine mt-3 hover:underline">
             <Users2 size={14} /> Ver agenda completa
           </Link>
         </section>

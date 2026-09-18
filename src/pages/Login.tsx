@@ -17,13 +17,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-porcelain px-4">
-      <div className="w-full max-w-sm">
-        <div className="flex flex-col items-center mb-8">
-          <img src="/logo_michelle.png" alt="Studio Michelle Lima" className="w-full max-w-[300px] h-auto mb-3" />
+    <div className="admin-login">
+      <div className="admin-login__content">
+        <div className="admin-login__brand">
+          <img src="/logo_michelle.png" alt="Studio Michelle Lima" />
           <p className="text-sm text-ink/55">Entre para acessar a agenda</p>
         </div>
-        <form onSubmit={handleSubmit} className="card p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="admin-login__form card p-6 space-y-4">
           {erro && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{erro}</p>}
           <label className="block">
             <span className="block text-xs font-medium text-ink/60 mb-1">E-mail</span>

@@ -321,8 +321,8 @@ function formatarErroSalvamento(error: unknown): string {
   if (error instanceof Error) return error.message
 
   if (typeof error === 'object' && error !== null) {
-    const erroSupabase = error as { message?: string; details?: string; hint?: string }
-    return [erroSupabase.message, erroSupabase.details, erroSupabase.hint].filter(Boolean).join(' ') || 'Não foi possível salvar o bloqueio.'
+    const erroApi = error as { message?: string; details?: string; hint?: string }
+    return [erroApi.message, erroApi.details, erroApi.hint].filter(Boolean).join(' ') || 'Não foi possível salvar o bloqueio.'
   }
 
   return 'Não foi possível salvar o bloqueio.'

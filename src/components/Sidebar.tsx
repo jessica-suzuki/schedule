@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { CalendarDays, CalendarPlus, LayoutDashboard, Users, Sparkles, BarChart3, LogOut } from 'lucide-react'
 import clsx from 'clsx'
-import { supabase } from '../lib/supabaseClient'
+import { useAuth } from '../lib/auth'
 
 const ITENS = [
   { to: '/admin', label: 'Painel', icon: LayoutDashboard, end: true },
@@ -13,6 +13,7 @@ const ITENS = [
 ]
 
 export function Sidebar() {
+  const { logout } = useAuth()
   return (
     <aside className="hidden md:flex md:flex-col md:w-60 shrink-0 bg-wine text-white">
       <div className="flex items-center gap-2 px-6 py-6">
@@ -39,7 +40,7 @@ export function Sidebar() {
         ))}
       </nav>
       <button
-        onClick={() => supabase.auth.signOut()}
+        onClick={logout}
         className="flex items-center gap-3 mx-3 mb-4 rounded-lg px-3 py-2.5 text-sm text-white/70 hover:bg-white/10 hover:text-white"
       >
         <LogOut size={18} /> Sair

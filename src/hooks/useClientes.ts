@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { supabase } from '../lib/supabaseClient'
+import { api } from '../lib/apiClient'
 import type { Cliente } from '../types'
 
 const QUERY_KEY = ['clientes']
@@ -7,14 +7,7 @@ const QUERY_KEY = ['clientes']
 export function useClientes() {
   return useQuery({
     queryKey: QUERY_KEY,
-    queryFn: async (): Promise<Cliente[]> => {
-      const { data, error } = await supabase
-        .from('clientes')
-        .select('*')
-        .order('nome_completo', { ascending: true })
-      if (error) throw error
-      return data as Cliente[]
-    },
+    queryFn: () => api.get<Cliente[]>('/api/clientes'),
   })
 }
 
@@ -23,11 +16,9 @@ export function useSalvarCliente() {
   return useMutation({
     mutationFn: async (cliente: Partial<Cliente>) => {
       if (cliente.id) {
-        const { error } = await supabase.from('clientes').update(cliente).eq('id', cliente.id)
-        if (error) throw error
+        await api.put(`/api/clientes/${cliente.id}`, cliente)
       } else {
-        const { error } = await supabase.from('clientes').insert(cliente)
-        if (error) throw error
+        await api.post('/api/clientes', cliente)
       }
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: QUERY_KEY }),
@@ -37,10 +28,7 @@ export function useSalvarCliente() {
 export function useExcluirCliente() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from('clientes').delete().eq('id', id)
-      if (error) throw error
-    },
+    mutationFn: (id: string) => api.delete(`/api/clientes/${id}`),
     onSuccess: () => qc.invalidateQueries({ queryKey: QUERY_KEY }),
   })
 }

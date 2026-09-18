@@ -12,6 +12,17 @@ dist
 dist-ssr
 *.local
 
+# Segredos (DATABASE_URL, JWT_SECRET, etc.) — nunca commitar
+.env
+.env.*
+!.env.example
+!server/.env.example
+server/node_modules
+
+# Dump antigo do Supabase (dados reais de clientes) — histórico local só,
+# não deve ir para o repositório.
+backup.sql
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -4,8 +4,14 @@
 // alguém configurar VITE_API_URL já com "/api" no final (comum quando o
 // Nginx faz proxy de "/api" para o backend), removemos esse sufixo aqui
 // para não duplicar o prefixo e virar "/api/api/...".
+//
+// Sem VITE_API_URL definida, usamos URL relativa ("" + "/api/...") em vez
+// de um fallback fixo pra localhost — assim, se o build de produção subir
+// sem essa variável configurada, ele chama "/api/..." no mesmo domínio
+// (funciona com Nginx fazendo proxy de /api para o backend) em vez de
+// silenciosamente tentar falar com o localhost de quem estiver acessando.
 function resolveApiUrl(): string {
-  const raw = (import.meta.env.VITE_API_URL as string | undefined) || 'http://localhost:3001'
+  const raw = (import.meta.env.VITE_API_URL as string | undefined) ?? ''
   return raw.replace(/\/+$/, '').replace(/\/api$/, '')
 }
 

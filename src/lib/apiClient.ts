@@ -1,4 +1,15 @@
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined) || 'http://localhost:3001'
+// Cada chamada em `api.*` já inclui o prefixo "/api/..." no path (ex.:
+// api.post('/api/auth/login', ...)). VITE_API_URL deve ser só a origem do
+// backend (ex.: "https://seudominio.com" ou "http://localhost:3001"). Se
+// alguém configurar VITE_API_URL já com "/api" no final (comum quando o
+// Nginx faz proxy de "/api" para o backend), removemos esse sufixo aqui
+// para não duplicar o prefixo e virar "/api/api/...".
+function resolveApiUrl(): string {
+  const raw = (import.meta.env.VITE_API_URL as string | undefined) || 'http://localhost:3001'
+  return raw.replace(/\/+$/, '').replace(/\/api$/, '')
+}
+
+const API_URL = resolveApiUrl()
 
 const TOKEN_KEY = 'clinica_app_token'
 

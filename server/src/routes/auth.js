@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import rateLimit from 'express-rate-limit'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import crypto from 'node:crypto'
@@ -10,9 +11,35 @@ function hashToken(token) {
   return crypto.createHash('sha256').update(token).digest('hex')
 }
 
+// Hash bcrypt de uma senha aleatória qualquer — nunca corresponde a uma
+// senha real. Usado só para gastar o mesmo tempo de CPU que um
+// bcrypt.compare de verdade quando o e-mail não existe, para a resposta
+// do login não revelar (por tempo de resposta) quais e-mails têm conta.
+const SENHA_HASH_FICTICIO =
+  '$2b$10$o69N0UA7gbzzPppdhImkJelNXqIepQUeR9QcoZPFMK0XrH8uT1.Z.'
+
+// Limita tentativas de login por IP para dificultar força bruta de senha.
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Muitas tentativas de login. Tente novamente em alguns minutos.' },
+})
+
+// Mais permissivo que o de login (é usado por gente que genuinamente
+// esqueceu a senha), mas ainda limita spam de e-mail / varredura de contas.
+const forgotPasswordLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hora
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Muitas tentativas. Tente novamente mais tarde.' },
+})
+
 export const authRouter = Router()
 
-authRouter.post('/login', async (req, res, next) => {
+authRouter.post('/login', loginLimiter, async (req, res, next) => {
   try {
     const { email, senha } = req.body ?? {}
     if (!email || !senha) {
@@ -24,12 +51,13 @@ authRouter.post('/login', async (req, res, next) => {
       [String(email).toLowerCase().trim()]
     )
     const usuario = rows[0]
-    if (!usuario) {
-      return res.status(401).json({ error: 'E-mail ou senha inválidos.' })
-    }
 
-    const senhaValida = await bcrypt.compare(senha, usuario.senha_hash)
-    if (!senhaValida) {
+    // Roda o bcrypt.compare mesmo quando o e-mail não existe (contra um
+    // hash fictício), para o tempo de resposta ser igual nos dois casos —
+    // ver SENHA_HASH_FICTICIO acima.
+    const senhaValida = await bcrypt.compare(senha, usuario?.senha_hash ?? SENHA_HASH_FICTICIO)
+
+    if (!usuario || !senhaValida) {
       return res.status(401).json({ error: 'E-mail ou senha inválidos.' })
     }
 
@@ -54,7 +82,7 @@ authRouter.get('/me', requireAuth, (req, res) => {
 
 // Sempre responde com sucesso genérico, mesmo se o e-mail não existir —
 // assim ninguém consegue descobrir quais e-mails têm conta só tentando aqui.
-authRouter.post('/forgot-password', async (req, res, next) => {
+authRouter.post('/forgot-password', forgotPasswordLimiter, async (req, res, next) => {
   try {
     const { email } = req.body ?? {}
     if (!email) {

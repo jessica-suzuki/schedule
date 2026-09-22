@@ -3,6 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 
+import logoMichelleImg from "../assets/logo_michelle.png";
 import heroImg from "../assets/hero.jpg";
 import instagram1Img from "../assets/instagram-1.jpg";
 import instagram2Img from "../assets/instagram-2.jpg";
@@ -145,7 +146,7 @@ export function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/5 bg-cream/85 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <img
-            src="/logo_michelle.png"
+            src={logoMichelleImg}
             alt="Studio Michelle Lima"
             className="h-12 w-auto"
           />

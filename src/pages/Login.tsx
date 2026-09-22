@@ -129,9 +129,8 @@ export default function LoginPage() {
           </form>
         )}
 
-        <p className="text-xs text-ink/40 text-center mt-4">
-          As contas de acesso são criadas pela equipe técnica (server/scripts/create-user.js).
-        </p>
+        {/* Contas de acesso são criadas pela equipe técnica via
+            server/scripts/create-user.js (não existe cadastro pelo painel). */}
       </div>
     </div>
   )

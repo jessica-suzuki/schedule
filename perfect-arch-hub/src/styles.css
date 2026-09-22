@@ -50,33 +50,33 @@
 :root {
   --radius: 0.625rem;
 
-  /* brand colors — oklch palette derived from the Michelle Lima logo (dusty rose) */
-  --brand: oklch(0.62 0.09 22);
-  --brand-deep: oklch(0.50 0.11 20);
-  --cream: oklch(0.97 0.015 34);
-  --blush: oklch(0.91 0.035 28);
-  --petal: oklch(0.80 0.055 24);
-  --ink: oklch(0.29 0.03 26);
+  /* brand colors — mesma paleta do painel admin (cream/brand) + ink roxo */
+  --brand: oklch(0.60 0.13 45);
+  --brand-deep: oklch(0.52 0.15 42);
+  --cream: oklch(0.96 0.02 80);
+  --blush: oklch(0.90 0.03 45);
+  --petal: oklch(0.82 0.05 30);
+  --ink: oklch(0.27 0.024 311);
 
   /* shadcn semantic mapped to warm palette */
   --background: var(--cream);
   --foreground: var(--ink);
-  --card: oklch(0.98 0.008 34);
+  --card: oklch(0.98 0.01 70);
   --card-foreground: var(--ink);
-  --popover: oklch(0.98 0.008 34);
+  --popover: oklch(0.98 0.01 70);
   --popover-foreground: var(--ink);
   --primary: var(--brand);
   --primary-foreground: var(--cream);
   --secondary: var(--blush);
   --secondary-foreground: var(--ink);
   --muted: var(--blush);
-  --muted-foreground: oklch(0.46 0.03 26);
+  --muted-foreground: oklch(0.45 0.04 45);
   --accent: var(--petal);
   --accent-foreground: var(--ink);
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0.003 70);
-  --border: oklch(0.29 0.02 26 / 0.10);
-  --input: oklch(0.29 0.02 26 / 0.10);
+  --border: oklch(0.30 0.03 45 / 0.10);
+  --input: oklch(0.30 0.03 45 / 0.10);
   --ring: var(--brand);
 
   --font-fraunces: "Fraunces", serif;

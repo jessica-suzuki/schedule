@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { api } from '../lib/apiClient'
 import { PasswordInput } from '../components/PasswordInput'
+import logoMichelle from '../assets/logo_michelle.png'
 
 export default function RedefinirSenhaPage() {
   const [searchParams] = useSearchParams()
@@ -43,7 +44,7 @@ export default function RedefinirSenhaPage() {
       <div className="admin-login">
         <div className="admin-login__content">
           <div className="admin-login__brand">
-            <img src="/logo_michelle.png" alt="Studio Michelle Lima" />
+            <img src={logoMichelle} alt="Studio Michelle Lima" />
           </div>
           <p className="card p-6 text-sm text-red-600">
             Link inválido. Peça um novo link na tela de login ("Esqueci minha senha").
@@ -57,7 +58,7 @@ export default function RedefinirSenhaPage() {
     <div className="admin-login">
       <div className="admin-login__content">
         <div className="admin-login__brand">
-          <img src="/logo_michelle.png" alt="Studio Michelle Lima" />
+          <img src={logoMichelle} alt="Studio Michelle Lima" />
           <p className="text-sm text-ink/55">Defina sua nova senha</p>
         </div>
 

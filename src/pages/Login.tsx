@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAuth } from '../lib/auth'
 import { api } from '../lib/apiClient'
 import { PasswordInput } from '../components/PasswordInput'
+import logoMichelle from '../assets/logo_michelle.png'
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -50,7 +51,7 @@ export default function LoginPage() {
     <div className="admin-login">
       <div className="admin-login__content">
         <div className="admin-login__brand">
-          <img src="/logo_michelle.png" alt="Studio Michelle Lima" />
+          <img src={logoMichelle} alt="Studio Michelle Lima" />
           <p className="text-sm text-ink/55">
             {modo === 'login' ? 'Entre para acessar a agenda' : 'Redefinir senha'}
           </p>

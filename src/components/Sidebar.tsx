@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { CalendarDays, CalendarPlus, LayoutDashboard, Users, Sparkles, BarChart3, LogOut } from 'lucide-react'
 import clsx from 'clsx'
 import { useAuth } from '../lib/auth'
+import logoMichelle from '../assets/logo_michelle.png'
 
 const ITENS = [
   { to: '/admin', label: 'Painel', icon: LayoutDashboard, end: true },
@@ -17,7 +18,7 @@ export function Sidebar() {
   return (
     <aside className="hidden md:flex md:flex-col md:w-60 shrink-0 bg-wine text-white">
       <div className="flex items-center gap-2 px-6 py-6">
-        <img src="/logo_michelle.png" alt="Studio Michelle Lima" className="w-full max-w-[188px] h-auto" />
+        <img src={logoMichelle} alt="Studio Michelle Lima" className="w-full max-w-[188px] h-auto" />
       </div>
       <nav className="flex-1 px-3 space-y-1">
         {ITENS.map(({ to, label, icon: Icon, end }) => (

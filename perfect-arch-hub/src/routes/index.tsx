@@ -98,7 +98,7 @@ export const Route = createFileRoute("/")({
         content:
           "Procedimentos de sobrancelha em Brasília: design, henna e microblading com resultado natural e acolhimento em cada detalhe.",
       },
-      { property: "og:image", content: "/logo_michelle.png" },
+      { property: "og:image", content: "https://michellelima.cloud/logo_michelle.png" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -111,7 +111,7 @@ export const Route = createFileRoute("/")({
         content:
           "Procedimentos de sobrancelha em Brasília: design, henna e microblading com resultado natural.",
       },
-      { name: "twitter:image", content: "/logo_michelle.png" },
+      { name: "twitter:image", content: "https://michellelima.cloud/logo_michelle.png" },
     ],
   }),
   component: Index,
